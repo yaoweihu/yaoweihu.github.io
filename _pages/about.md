@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Ph.D. Candidate at University of Arkansas
+subtitle:
 
 profile:  
   align: right
