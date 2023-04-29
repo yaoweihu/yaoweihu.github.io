@@ -1,12 +1,7 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - yaoweihu
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - yaoweihu/Achieving-Long-term-Fairness
+  - yaoweihu/Bound-Confounded-Causal-Effects
+  - yaoweihu/Fair-Multiple-Decision-Making
