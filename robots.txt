@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://yaoweihu.github.io/sitemap.xml
