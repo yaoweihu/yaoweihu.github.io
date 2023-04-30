@@ -212,7 +212,7 @@ blockquote {
 
 @media (min-width: 576px) {
   .profile {
-    width: 23.5%;
+    width: 23%;
     padding-right: 10px;
   }
   .profile .address p {
@@ -295,11 +295,11 @@ blockquote {
 
 .navbar-toggler .icon-bar {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
   background-color: var(--global-text-color);
   border-radius: 1px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   transition: all 0.2s;
 }
 .navbar-toggler .top-bar {
@@ -424,6 +424,9 @@ footer.sticky-bottom {
   color: var(--global-text-color-light);
 }
 
+.post-title {
+  font-size: 2.2em;
+}
 .post-title mjx-container[jax=CHTML][display=true] {
   display: unset;
 }
