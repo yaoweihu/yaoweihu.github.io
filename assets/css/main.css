@@ -212,7 +212,8 @@ blockquote {
 
 @media (min-width: 576px) {
   .profile {
-    width: 30%;
+    width: 23.5%;
+    padding-right: 10px;
   }
   .profile .address p {
     display: block;
@@ -334,10 +335,10 @@ blockquote {
 }
 
 .social {
-  text-align: center;
+  text-align: left;
 }
 .social .contact-icons {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 .social .contact-icons a i::before {
   color: var(--global-text-color);
