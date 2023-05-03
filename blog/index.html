@@ -10,7 +10,7 @@ pagination:
   sort_reverse: true
   trail:
     before: 1 # The number of links before the current page
-    after: 3  # The number of links after the current page
+    after: 2  # The number of links after the current page
 ---
 
 <div class="post">
@@ -20,8 +20,8 @@ pagination:
 
   {% if blog_name_size > 0 or blog_description_size > 0 %}
   <div class="header-bar">
-    <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
+    <h1 style="font-size:50px">{{ site.blog_name }}</h1>
+    <h2 style="font-size:25px">{{ site.blog_description }}</h2>
   </div>
   {% endif %}
 
@@ -55,15 +55,15 @@ pagination:
     <li>
       <h3>
         {% if post.redirect == blank %}
-          <a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          <a class="post-title" style="font-size:30px" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         {% else %}
           {% if post.redirect contains '://' %}
-            <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
+            <a class="post-title" style="font-size:30px" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
             <svg width="2rem" height="2rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           {% else %}
-            <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
+            <a class="post-title" style="font-size:30px" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
           {% endif %}
         {% endif %}
       </h3>
