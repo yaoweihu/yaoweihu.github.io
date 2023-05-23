@@ -20,3 +20,5 @@ social: true  # includes social icons at the bottom of the page
 <strong>About Me</strong>: I am a Ph.D. candidate from the CSCE department at  <a href="https://www.uark.edu">University of Arkansas</a>, advised by <a href="http://www.csce.uark.edu/~lz006/">Prof. Lu Zhang</a>. Previously, I obtained my M.S. and B.ENG. from the college of computer at <a href="https://en.scu.edu.cn">Sichuan University</a> in China.
 
 <strong>Research Interest</strong>: Currently, my research primarily focuses on fair machine learning and causal inference. Specifically, I propose various fairness algorithms to achieve long-term fairness in sequential decision-making. My interests also include generative models, reinforcement learning, and natural language processing.
+
+Now I am looking for an internship or a full-time job. If you can provide any information, please feel free to contact me.
