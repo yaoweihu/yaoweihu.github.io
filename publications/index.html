@@ -333,7 +333,20 @@
         <div class="author">
         
 
-        </div>
+        <em>Yaowei Hu</em>, Lei Duan, Ling Li, and
+          <span class="more-authors" title="click to view 1 more author" onclick="
+                var element = $(this);
+                element.attr('title', '');
+                var more_authors_text = element.text() == '1 more author' ? 'Chao Han' : '1 more author';
+                var cursorPosition = 0;
+                var textAdder = setInterval(function(){
+                  element.text(more_authors_text.substring(0, cursorPosition + 1));
+                  if (++cursorPosition == more_authors_text.length){
+                    clearInterval(textAdder);
+                  }
+              }, '10');
+              ">1 more author</span>
+</div>
 
         <!-- Journal/Book title and date -->
         
@@ -358,11 +371,10 @@
           <!-- Hidden bibtex block -->
           <div class="bibtex hidden">
             <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@article</span><span class="p">{</span><span class="nl">hu2018biological</span><span class="p">,</span>
-  <span class="na">author</span> <span class="p">=</span> <span class="s">{}</span><span class="p">,</span>
   <span class="na">title</span> <span class="p">=</span> <span class="s">{Biological sequence classification algorithm based on density-aware patterns}</span><span class="p">,</span>
-  <span class="na">publisher</span> <span class="p">=</span> <span class="s">{Journal of Computer Applications}</span><span class="p">,</span>
-  <span class="na">year</span> <span class="p">=</span> <span class="s">{2018}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Hu, Yaowei and Duan, Lei and Li, Ling and Han, Chao}</span><span class="p">,</span>
   <span class="na">journal</span> <span class="p">=</span> <span class="s">{Journal of Computer Applications}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2018}</span><span class="p">,</span>
   <span class="na">volume</span> <span class="p">=</span> <span class="s">{38}</span><span class="p">,</span>
   <span class="na">number</span> <span class="p">=</span> <span class="s">{2}</span><span class="p">,</span>
   <span class="na">eid</span> <span class="p">=</span> <span class="s">{427}</span><span class="p">,</span>
