@@ -29,6 +29,13 @@
     - title: B.Eng. in Network Engineering
       institution: Sichuan University, Sichuan, China
       year: 2015
+      
+- title: Experience
+  type: time_table
+  contents:
+    - title: NLP Research Scientist Intern
+      institution: Decoda.AI, Santa Clara, California
+      year: 2023 Summer
 
 - title: Academic Services
   type: nested_list
