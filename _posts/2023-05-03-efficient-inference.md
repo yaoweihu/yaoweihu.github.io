@@ -1,7 +1,7 @@
 ---
 layout: distill
-title: A Introduction to Diffusion Models
-description: In this blog post, I'll summarize some basic knowledge about diffusion models.
+title: Efficient Inference
+description: Model Compression, Efficient Inference
 giscus_comments: true
 date: 2023-05-03
 
@@ -9,7 +9,7 @@ authors:
   - name: Yaowei Hu
     url: "https://en.wikipedia.org/wiki/Albert_Einstein"
     affiliations:
-      name: University of Arkansas
+      name:
   
 bibliography:
 
@@ -35,3 +35,14 @@ _styles: >
 ---
 
 ## Introduction
+In existing research, efficient inference (also known as model compression) can be achieved by following several methods: 
+- network pruning & sparse neural network
+- quantization
+- neural architecture search
+- knowledge distillation
+
+Efficient training:
+- gradient compression
+- on-device training
+- federated learning
+
