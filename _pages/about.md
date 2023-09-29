@@ -21,4 +21,4 @@ social: true  # includes social icons at the bottom of the page
 
 <strong>Research Interest</strong>: Currently, my research primarily focuses on fair machine learning and causal inference. Specifically, I propose various fairness algorithms to achieve long-term fairness in sequential decision-making. My interests also include generative models, reinforcement learning, natural language processing. Recently, I have been working on downstream applications of LLMs.
 
-Now I am looking for an internship or a full-time job. If you can provide any information, please feel free to contact me.
+<!-- Now I am looking for an internship or a full-time job. If you can provide any information, please feel free to contact me. -->
