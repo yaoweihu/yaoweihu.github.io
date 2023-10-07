@@ -40,10 +40,13 @@
 - title: Academic Services
   type: nested_list
   contents:
-    - title: Conference Reviewer.
+    - title: Conference Reviewer
       items: 
         - AAAI (2023 - 2024)
         - ECML-PKDD (2022 - 2023)
+    - title: Journal Reviewer
+      items:
+        - Intelligent Data Analysis
 
 # - title: Experience
 #   type: time_table
