@@ -425,11 +425,11 @@ footer.sticky-bottom {
   color: var(--global-text-color-light);
 }
 
-.post-title {
-  font-size: 2.2em;
-}
 .post-title mjx-container[jax=CHTML][display=true] {
   display: unset;
+}
+.post-title {
+  font-size: 2.2em;
 }
 
 .post-list {
