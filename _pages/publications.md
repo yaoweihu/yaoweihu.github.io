@@ -4,7 +4,7 @@ permalink: /publications/
 title: Publications
 description: (*) denotes equal contribution
 # years: [2022, 2021, 2020, 1967, 1956, 1950, 1935]
-years: [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2018]
+years: [2025, 2024, 2023, 2022, 2021, 2020, 2018]
 nav: true
 nav_order: 1
 ---
