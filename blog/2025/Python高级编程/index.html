@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Position Embeddings | Yaowei Hu</title>
     <meta name="author" content="Yaowei  Hu">
-    <meta name="description" content="In this blog, I'm gonna introduce some basic concept about position embeddings, including absolute, relative and rotary embeddings.">
+    <meta name="description" content="In this blog, I'm gonna introduce some basic concepts about position embeddings, including absolute, relative and rotary position embeddings.">
     <meta name="keywords" content="yaowei, hu, yaoweihu, huyaowei">
 
 
@@ -73,7 +73,7 @@
 <d-front-matter>
     <script async type="text/json">{
       "title": "Position Embeddings",
-      "description": "In this blog, I'm gonna introduce some basic concept about position embeddings, including absolute, relative and rotary embeddings.",
+      "description": "In this blog, I'm gonna introduce some basic concepts about position embeddings, including absolute, relative and rotary position embeddings.",
       "published": "December 24, 2025",
       "authors": [
         {
@@ -169,7 +169,7 @@
 
       <d-title>
         <h1>Position Embeddings</h1>
-        <p>In this blog, I'm gonna introduce some basic concept about position embeddings, including absolute, relative and rotary embeddings.</p>
+        <p>In this blog, I'm gonna introduce some basic concepts about position embeddings, including absolute, relative and rotary position embeddings.</p>
       </d-title>
 
       <d-byline></d-byline>
@@ -185,15 +185,11 @@
           </nav>
         </d-contents>
 
-        <h2 id="高并发编程">高并发编程</h2>
+        <p>Transformers are foundational architecture of LLMs. However, they are <strong>position-agnostic</strong>. Therefore, positional information must be explicitly provided to help the model better understand word order in the sequence.</p>
 
-<p>高并发中涉及到一些基本的概念，包括线程、进程。</p>
-<ul>
-  <li>线程(Thread)：它是计算机任务的具体执行者，是操作系统能够进行运算、调度的最小单位。一个进行可以拥有多个线程，线程是开发者可以直接与计算机CPU或内存进行交互的最小单位。</li>
-  <li>进程(Process)：它是计算机中的基础运算单元，是CPU统筹计算机中有所任务的程序实体，是系统进行资源分配的基本单位。</li>
-</ul>
+<h2 id="absolute-position-embedding">Absolute Position Embedding</h2>
 
-<p>当启动Python项目时，根据Python虚拟机（或解释器）解释Python语言的规范，Python虚拟机会创建一个专门用于解析Python语言的主线程，接着会创建一个专门用于Python语言所定义的任务的工作线程。即一旦Python项目运行起来，就会存在一个Python主线程和至少一个工作线程。</p>
+<h2 id="relative-position-embedding">Relative Position Embedding</h2>
 
       </d-article>
 
