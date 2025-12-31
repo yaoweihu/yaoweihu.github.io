@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://yaoweihu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yaoweihu.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-12-31T18:13:15+00:00</updated><id>https://yaoweihu.github.io/feed.xml</id><title type="html">Yaowei Hu</title><subtitle></subtitle><entry><title type="html">Qwen3模型架构</title><link href="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/" rel="alternate" type="text/html" title="Qwen3模型架构" /><published>2025-12-24T00:00:00+00:00</published><updated>2025-12-24T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/"><![CDATA[<h2 id="旋转位置编码rope">旋转位置编码（RoPE）</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://yaoweihu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yaoweihu.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-12-31T18:21:06+00:00</updated><id>https://yaoweihu.github.io/feed.xml</id><title type="html">Yaowei Hu</title><subtitle></subtitle><entry><title type="html">Qwen3模型架构</title><link href="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/" rel="alternate" type="text/html" title="Qwen3模型架构" /><published>2025-12-24T00:00:00+00:00</published><updated>2025-12-24T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/"><![CDATA[<h2 id="旋转位置编码rope">旋转位置编码（RoPE）</h2>
 <p>绝对位置编码具有实现简单、计算速度快等优点，而相对位置编码则更吻合我们的直觉，实际性能往往也更好。RoPE则集各家之长，实现了“以绝对位置编码的方式实现相对位置编码”。</p>
 
 <p>RoPE希望的建模目标为：找到一个函数$f$，使得如下关系成立</p>
@@ -109,7 +109,7 @@ q_{d-2} \\
 
 <p>RoPE的实现图解：</p>
 
-<p><img src="/assets/imgs/RoPE.png" alt="RoPE" /></p>
+<p><img src="/assets/imgs/RoPE.png" alt="RoPE" width="600px" /></p>
 
 <h2 id="参考">参考</h2>
 <p><a href="https://kexue.fm/archives/8265">Transformer升级之路：2、博采众长的旋转式位置编码</a>  <br />
