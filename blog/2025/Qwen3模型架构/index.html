@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">
+    <link rel="canonical" href="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/">
 
     <!-- Dark Mode -->
     
@@ -188,13 +188,17 @@
         <h2 id="旋转位置编码rope">旋转位置编码（RoPE）</h2>
 <p>绝对位置编码具有实现简单、计算速度快等优点，而相对位置编码则更合我们的直觉吻合，实际性能往往也更好。而RoPE则集各家之长，实现了“以绝对位置编码的方式实现相对位置编码”。</p>
 
-<p>RoPE希望的建模目标为：找到一个函数$f$，使得如下关系成立
-\(f(q, m) \cdot f(k, n) = g(q, k, m - n)\)
-其中，$f$是把位置信息结合到query/key embeddings的机制。$g$是以query/key embedidings和相对位置$m - n$为输入的函数。该函数的左边是以绝对位置编码，而右边是实现了相对位置编码。</p>
+<p>RoPE希望的建模目标为：找到一个函数$f$，使得如下关系成立</p>
 
-<p>RoPE得到的最终函数$f$为
-\(f(q, m) = R_mq = \begin{pmatrix} \cos m\theta &amp; -\sin m\theta \\ \sin m\theta &amp; \cos m\theta \end{pmatrix} \begin{pmatrix} p_0 \\ p_1 \end{pmatrix}\)
-左侧的$R_m$是一个旋转矩阵，$f(q, m)$表示在保持向量$q$的模长的同时，将其逆时针旋转$m\theta$。这意味着只需要装将向量旋转某个角度，即可实现对该向量添加绝对位置信息，这就是旋转位置编码的由来。</p>
+\[f(q, m) \cdot f(k, n) = g(q, k, m - n)\]
+
+<p>其中，$f$是把位置信息结合到query/key embeddings的机制。$g$是以query/key embedidings和相对位置$m - n$为输入的函数。该函数的左边是以绝对位置编码，而右边是实现了相对位置编码。</p>
+
+<p>RoPE得到的最终函数$f$为</p>
+
+\[f(q, m) = R_mq = \begin{pmatrix} \cos m\theta &amp; -\sin m\theta \\ \sin m\theta &amp; \cos m\theta \end{pmatrix} \begin{pmatrix} p_0 \\ p_1 \end{pmatrix}\]
+
+<p>左侧的$R_m$是一个旋转矩阵，$f(q, m)$表示在保持向量$q$的模长的同时，将其逆时针旋转$m\theta$。这意味着只需要装将向量旋转某个角度，即可实现对该向量添加绝对位置信息，这就是旋转位置编码的由来。</p>
 
 <p>进一步验证RoPE以绝对位置编码实现相对位置编码</p>
 
@@ -207,7 +211,7 @@ q_m \cdot k_n &amp;= f(q, m) \cdot f(k, n) \\
 \end{align}\]
 
 <h2 id="参考">参考</h2>
-<p><a href="https://kexue.fm/archives/8265" rel="external nofollow noopener" target="_blank">Transformer升级之路：2、博采众长的旋转式位置编码</a>
+<p><a href="https://kexue.fm/archives/8265" rel="external nofollow noopener" target="_blank">Transformer升级之路：2、博采众长的旋转式位置编码</a>  <br>
 <a href="https://zhuanlan.zhihu.com/p/667864459" rel="external nofollow noopener" target="_blank">图解RoPE旋转位置编码及其特性</a></p>
 
       </d-article>
