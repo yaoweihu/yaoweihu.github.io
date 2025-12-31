@@ -1,8 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://yaoweihu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yaoweihu.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-12-25T04:42:14+00:00</updated><id>https://yaoweihu.github.io/feed.xml</id><title type="html">Yaowei Hu</title><subtitle></subtitle><entry><title type="html">Position Embeddings</title><link href="https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" rel="alternate" type="text/html" title="Position Embeddings" /><published>2025-12-24T00:00:00+00:00</published><updated>2025-12-24T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"><![CDATA[<p>Transformers are foundational architecture of LLMs. However, they are <strong>position-agnostic</strong>. Therefore, positional information must be explicitly provided to help the model better understand word order in the sequence.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://yaoweihu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yaoweihu.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-12-31T06:23:15+00:00</updated><id>https://yaoweihu.github.io/feed.xml</id><title type="html">Yaowei Hu</title><subtitle></subtitle><entry><title type="html">Qwen3模型架构</title><link href="https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/" rel="alternate" type="text/html" title="Qwen3模型架构" /><published>2025-12-24T00:00:00+00:00</published><updated>2025-12-24T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2025/Python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"><![CDATA[<h2 id="旋转位置编码rope">旋转位置编码（RoPE）</h2>
+<p>绝对位置编码具有实现简单、计算速度快等优点，而相对位置编码则更合我们的直觉吻合，实际性能往往也更好。而RoPE则集各家之长，实现了“以绝对位置编码的方式实现相对位置编码”。</p>
 
-<h2 id="absolute-position-embedding">Absolute Position Embedding</h2>
+<p>RoPE希望的建模目标为：找到一个函数$f$，使得如下关系成立
+\(f(q, m) \cdot f(k, n) = g(q, k, m - n)\)
+其中，$f$是把位置信息结合到query/key embeddings的机制。$g$是以query/key embedidings和相对位置$m - n$为输入的函数。该函数的左边是以绝对位置编码，而右边是实现了相对位置编码。</p>
 
-<h2 id="relative-position-embedding">Relative Position Embedding</h2>]]></content><author><name>Yaowei Hu</name></author><summary type="html"><![CDATA[In this blog, I'm gonna introduce some basic concepts about position embeddings, including absolute, relative and rotary position embeddings.]]></summary></entry><entry><title type="html">Efficient Inference</title><link href="https://yaoweihu.github.io/blog/2023/efficient-inference/" rel="alternate" type="text/html" title="Efficient Inference" /><published>2023-05-03T00:00:00+00:00</published><updated>2023-05-03T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2023/efficient-inference</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2023/efficient-inference/"><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>RoPE得到的最终函数$f$为
+\(f(q, m) = R_mq = \begin{pmatrix} \cos m\theta &amp; -\sin m\theta \\ \sin m\theta &amp; \cos m\theta \end{pmatrix} \begin{pmatrix} p_0 \\ p_1 \end{pmatrix}\)
+左侧的$R_m$是一个旋转矩阵，$f(q, m)$表示在保持向量$q$的模长的同时，将其逆时针旋转$m\theta$。这意味着只需要装将向量旋转某个角度，即可实现对该向量添加绝对位置信息，这就是旋转位置编码的由来。</p>
+
+<p>进一步验证RoPE以绝对位置编码实现相对位置编码</p>
+
+\[\begin{align} 
+q_m \cdot k_n &amp;= f(q, m) \cdot f(k, n) \\
+&amp;= (R_mq)^T * (R_nk) \\
+&amp;= q^TR_m^T * R_nk \\
+&amp;=q^T\begin{bmatrix} cos(n-m)\theta &amp; -sin(n-m)\theta \\ sin(n-m)\theta &amp; cos(n-m)\theta \end{bmatrix} k \\
+&amp;=q^TR_{n-m}k
+\end{align}\]
+
+<h2 id="参考">参考</h2>
+<p><a href="https://kexue.fm/archives/8265">Transformer升级之路：2、博采众长的旋转式位置编码</a>
+<a href="https://zhuanlan.zhihu.com/p/667864459">图解RoPE旋转位置编码及其特性</a></p>]]></content><author><name>Yaowei Hu</name></author><summary type="html"><![CDATA[这篇blog主要介绍目前主流GPT架构中使用到的一些模块。]]></summary></entry><entry><title type="html">Efficient Inference</title><link href="https://yaoweihu.github.io/blog/2023/efficient-inference/" rel="alternate" type="text/html" title="Efficient Inference" /><published>2023-05-03T00:00:00+00:00</published><updated>2023-05-03T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2023/efficient-inference</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2023/efficient-inference/"><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>In existing research, efficient inference (also known as model compression) can be achieved by following several methods:</p>
 <ul>
   <li>network pruning &amp; sparse neural network</li>
