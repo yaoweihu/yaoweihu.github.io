@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://yaoweihu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yaoweihu.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-12-31T17:14:12+00:00</updated><id>https://yaoweihu.github.io/feed.xml</id><title type="html">Yaowei Hu</title><subtitle></subtitle><entry><title type="html">Qwen3模型架构</title><link href="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/" rel="alternate" type="text/html" title="Qwen3模型架构" /><published>2025-12-24T00:00:00+00:00</published><updated>2025-12-24T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/"><![CDATA[<h2 id="旋转位置编码rope">旋转位置编码（RoPE）</h2>
-<p>绝对位置编码具有实现简单、计算速度快等优点，而相对位置编码则更合我们的直觉吻合，实际性能往往也更好。而RoPE则集各家之长，实现了“以绝对位置编码的方式实现相对位置编码”。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://yaoweihu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yaoweihu.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-12-31T18:03:38+00:00</updated><id>https://yaoweihu.github.io/feed.xml</id><title type="html">Yaowei Hu</title><subtitle></subtitle><entry><title type="html">Qwen3模型架构</title><link href="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/" rel="alternate" type="text/html" title="Qwen3模型架构" /><published>2025-12-24T00:00:00+00:00</published><updated>2025-12-24T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2025/Qwen3%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84/"><![CDATA[<h2 id="旋转位置编码rope">旋转位置编码（RoPE）</h2>
+<p>绝对位置编码具有实现简单、计算速度快等优点，而相对位置编码则更吻合我们的直觉，实际性能往往也更好。RoPE则集各家之长，实现了“以绝对位置编码的方式实现相对位置编码”。</p>
 
 <p>RoPE希望的建模目标为：找到一个函数$f$，使得如下关系成立</p>
 
@@ -23,9 +23,96 @@ q_m \cdot k_n &amp;= f(q, m) \cdot f(k, n) \\
 &amp;=q^TR_{n-m}k
 \end{align}\]
 
+<p>为了把RoPE推广到高维向量，可以分而治之，把高维向量分为两两一组，分别旋转。这个公式表示为</p>
+
+\[\begin{pmatrix}
+\cos m\theta &amp; -\sin m\theta &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
+\sin m\theta &amp;  \cos m\theta &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \cos m\theta &amp; -\sin m\theta &amp; \ldots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \sin m\theta &amp;  \cos m\theta &amp; \ldots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; \cos m\theta &amp; -\sin m\theta\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; \sin m\theta &amp;  \cos m\theta\\
+\end{pmatrix}
+\begin{pmatrix}
+q_0 \\
+q_1 \\
+q_2 \\
+q_3 \\
+\vdots \\
+q_{d-2} \\
+q_{d-1}
+\end{pmatrix}\]
+
+<p>按照直觉，相对距离近的embedings应该有较强的attention，距离越远就越若，这也被称为\bm{远程衰减性}。为了实现这个特性，RoPE借鉴了Sinusoidal位置编码，将每个分组的$\theta$设置为不同的常量，从而引入远程衰减的性质。设置$\theta_i = 10000^{-2i/d}$, 上个公式变为</p>
+
+\[\begin{pmatrix}
+\cos m\theta_0 &amp; -\sin m\theta_0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
+\sin m\theta_0 &amp;  \cos m\theta_0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \cos m\theta_1 &amp; -\sin m\theta_1 &amp; \ldots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \sin m\theta_1 &amp;  \cos m\theta_1 &amp; \ldots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; \cos m\theta_{d/2-1} &amp; -\sin m\theta_{d/2-1}\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; \sin m\theta_{d/2-1} &amp;  \cos m\theta_{d/2-1}\\
+\end{pmatrix}
+\begin{pmatrix}
+q_0 \\
+q_1 \\
+q_2 \\
+q_3 \\
+\vdots \\
+q_{d-2} \\
+q_{d-1}
+\end{pmatrix}\]
+
+<p>上式中的旋转矩阵十分稀疏，为了节省算力，可以以下面的方式等效实现：</p>
+
+\[\begin{pmatrix}
+q_0 \\
+q_1 \\
+q_2 \\
+q_3 \\
+\cdot \\
+q_{d-2} \\
+q_{d-1} \\
+\end{pmatrix}
+\otimes
+\begin{pmatrix}
+\cos m\theta_0 \\
+\cos m\theta_0 \\
+\cos m\theta_1 \\
+\cos m\theta_1 \\
+\cdot \\
+\cos m\theta_{d/2-1} \\
+\cos m\theta_{d/2-1} \\
+\end{pmatrix}
++
+\begin{pmatrix}
+-q_1 \\
+q_0 \\
+-q_3 \\
+q_2 \\
+\cdot \\
+-q_{d-1} \\
+q_{d-2} \\
+\end{pmatrix}
+\otimes
+\begin{pmatrix}
+\sin m\theta_0 \\
+\sin m\theta_0 \\
+\sin m\theta_1 \\
+\sin m\theta_1 \\
+\cdot \\
+\sin m\theta_{d/2-1}\\
+\sin m\theta_{d/2-1}\\
+\end{pmatrix}\]
+
+<p>RoPE的实现图解：
+<img src="./imgs/RoPE.png" alt="RoPE" /></p>
+
 <h2 id="参考">参考</h2>
 <p><a href="https://kexue.fm/archives/8265">Transformer升级之路：2、博采众长的旋转式位置编码</a>  <br />
-<a href="https://zhuanlan.zhihu.com/p/667864459">图解RoPE旋转位置编码及其特性</a></p>]]></content><author><name>Yaowei Hu</name></author><summary type="html"><![CDATA[这篇blog主要介绍目前主流GPT架构中使用到的一些模块。]]></summary></entry><entry><title type="html">Efficient Inference</title><link href="https://yaoweihu.github.io/blog/2023/efficient-inference/" rel="alternate" type="text/html" title="Efficient Inference" /><published>2023-05-03T00:00:00+00:00</published><updated>2023-05-03T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2023/efficient-inference</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2023/efficient-inference/"><![CDATA[<h2 id="introduction">Introduction</h2>
+<a href="https://zhuanlan.zhihu.com/p/667864459">图解RoPE旋转位置编码及其特性</a></p>]]></content><author><name>Yaowei Hu</name></author><summary type="html"><![CDATA[这篇blog以Qwen3为例，介绍目前主流GPT架构中使用到的一些模块。]]></summary></entry><entry><title type="html">Efficient Inference</title><link href="https://yaoweihu.github.io/blog/2023/efficient-inference/" rel="alternate" type="text/html" title="Efficient Inference" /><published>2023-05-03T00:00:00+00:00</published><updated>2023-05-03T00:00:00+00:00</updated><id>https://yaoweihu.github.io/blog/2023/efficient-inference</id><content type="html" xml:base="https://yaoweihu.github.io/blog/2023/efficient-inference/"><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>In existing research, efficient inference (also known as model compression) can be achieved by following several methods:</p>
 <ul>
   <li>network pruning &amp; sparse neural network</li>
