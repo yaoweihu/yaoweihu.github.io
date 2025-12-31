@@ -231,7 +231,7 @@ q_{d-2} \\
 q_{d-1}
 \end{pmatrix}\]
 
-<p>按照直觉，相对距离近的embedings应该有较强的attention，距离越远就越若，这也被称为\bm{远程衰减性}。为了实现这个特性，RoPE借鉴了Sinusoidal位置编码，将每个分组的$\theta$设置为不同的常量，从而引入远程衰减的性质。设置$\theta_i = 10000^{-2i/d}$, 上个公式变为</p>
+<p>按照直觉，相对距离近的embedings应该有较强的attention，距离越远就越若，这也被称为<strong>远程衰减性</strong>。为了实现这个特性，RoPE借鉴了Sinusoidal位置编码，将每个分组的$\theta$设置为不同的常量，从而引入远程衰减的性质。设置$\theta_i = 10000^{-2i/d}$, 上个公式变为</p>
 
 \[\begin{pmatrix}
 \cos m\theta_0 &amp; -\sin m\theta_0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
