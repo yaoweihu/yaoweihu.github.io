@@ -42,3 +42,23 @@ nav_order: 3
   {% endfor %}
 </div>
 {% endif %}
+
+---
+
+## Visitor Statistics
+
+<div class="text-center my-4">
+
+<p style="font-size: 1.05em; margin-bottom: 1.2rem;">
+  <i class="fas fa-eye mr-1"></i> Total Visits:&nbsp;<span id="busuanzi_value_site_pv">...</span>
+  &emsp;|&emsp;
+  <i class="fas fa-user mr-1"></i> Unique Visitors:&nbsp;<span id="busuanzi_value_site_uv">...</span>
+</p>
+
+<div style="max-width: 600px; margin: 0 auto;">
+  <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a"></script>
+</div>
+
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
