@@ -49,29 +49,16 @@ nav_order: 3
 
 <div class="text-center my-4">
 
-<p style="font-size: 1.05em; margin-bottom: 1.2rem;" id="busuanzi_container">
+<p style="font-size: 1.05em; margin-bottom: 1.2rem;">
   <i class="fas fa-eye mr-1"></i> Total Visits:&nbsp;<span id="busuanzi_value_site_pv">...</span>
   &emsp;|&emsp;
   <i class="fas fa-user mr-1"></i> Unique Visitors:&nbsp;<span id="busuanzi_value_site_uv">...</span>
 </p>
 
-<div style="max-width: 600px; margin: 0 auto;" id="clustrmaps-container"></div>
+<div style="max-width: 600px; margin: 0 auto;">
+  <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a"></script>
+</div>
 
 </div>
 
-<script>
-(function () {
-  if (localStorage.getItem('site_owner') === '1') return;
-  // busuanzi
-  var bsz = document.createElement('script');
-  bsz.async = true;
-  bsz.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-  document.head.appendChild(bsz);
-  // clustrmaps
-  var cm = document.createElement('script');
-  cm.type = 'text/javascript';
-  cm.id = 'clustrmaps';
-  cm.src = '//clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a';
-  document.getElementById('clustrmaps-container').appendChild(cm);
-})();
-</script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
