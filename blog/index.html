@@ -334,9 +334,20 @@
     };
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
-  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
-    
+    <!-- Google Analytics - skipped when isOwner flag is set in localStorage -->
+  <script>
+    if (localStorage.getItem('site_owner') !== '1') {
+      var _gaScript = document.createElement('script');
+      _gaScript.async = true;
+      _gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PPG4N54FM';
+      document.head.appendChild(_gaScript);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-1PPG4N54FM');
+    }
+  </script>
     
 
 <!-- Scrolling Progress Bar -->
