@@ -55,7 +55,7 @@ nav_order: 3
   <i class="fas fa-user mr-1"></i> Unique Visitors:&nbsp;<span id="busuanzi_value_site_uv">...</span>
 </p>
 
-<div style="max-width: 600px; margin: 0 auto;" id="clustrmaps-container"></div>
+<div style="max-width: 400px; margin: 0 auto;" id="clustrmaps-container"></div>
 
 </div>
 
@@ -69,7 +69,7 @@ nav_order: 3
   var cm = document.createElement('script');
   cm.type = 'text/javascript';
   cm.id = 'clustrmaps';
-  cm.src = '//clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a';
+  cm.src = '//clustrmaps.com/globe.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74';
   document.getElementById('clustrmaps-container').appendChild(cm);
 })();
 </script>
