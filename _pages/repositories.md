@@ -45,7 +45,7 @@ nav_order: 3
 
 ---
 
-## Visitor Statistics
+## Global Visitor Map
 
 <div class="text-center my-4">
 
@@ -55,7 +55,12 @@ nav_order: 3
   <i class="fas fa-user mr-1"></i> Unique Visitors:&nbsp;<span id="busuanzi_value_site_uv">...</span>
 </p>
 
-<div style="max-width: 600px; margin: 0 auto;" id="clustrmaps-container"></div>
+<p class="text-muted" style="margin-bottom: 1rem;">
+  Visitor locations are aggregated from IP geolocation and shown at city level.
+</p>
+
+<div style="max-width: 600px; margin: 0 auto; min-height: 260px;" id="clustrmaps-container">
+</div>
 
 </div>
 
@@ -69,7 +74,7 @@ nav_order: 3
   var cm = document.createElement('script');
   cm.type = 'text/javascript';
   cm.id = 'clustrmaps';
-  cm.src = '//clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a';
+  cm.src = '//cdn.clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a&t=tt';
   document.getElementById('clustrmaps-container').appendChild(cm);
 })();
 </script>
