@@ -1,14 +1,12 @@
-{% assign repo_url =  include.repository | split: '/' %}
-
-{% if site.data.repositories.github_users contains repo_url.first %}
-  {% assign show_owner = false %}
-{% else %}
-  {% assign show_owner = true %}
-{% endif %}
-
-<div class="repo p-2 text-center">
-  <a href="https://github.com/{{ include.repository }}">
-    <img class="repo-img-light w-100" alt="{{ include.repository }}" src="https://opengraph.githubassets.com/1/{{ include.repository }}" data-fallback="https://github-readme-stats.vercel.app/api/pin/?username={{ repo_url[0] }}&repo={{ repo_url[1] }}&theme={{ site.repo_theme_light }}&show_owner={{ show_owner }}" onerror="if (this.dataset.fallback) { this.onerror = null; this.src = this.dataset.fallback; }">
-    <img class="repo-img-dark w-100" alt="{{ include.repository }}" src="https://opengraph.githubassets.com/1/{{ include.repository }}" data-fallback="https://github-readme-stats.vercel.app/api/pin/?username={{ repo_url[0] }}&repo={{ repo_url[1] }}&theme={{ site.repo_theme_dark }}&show_owner={{ show_owner }}" onerror="if (this.dataset.fallback) { this.onerror = null; this.src = this.dataset.fallback; }">
-  </a>
-</div>
+<a class="repo-card" href="https://github.com/{{ include.repository }}" target="_blank" rel="noopener" data-repo="{{ include.repository }}">
+  <div class="repo-card-header">
+    <i class="far fa-folder-open repo-card-icon"></i>
+    <span class="repo-card-name">{{ include.repository | split: '/' | last }}</span>
+  </div>
+  <p class="repo-card-desc">{{ include.repository }}</p>
+  <div class="repo-card-meta">
+    <span class="repo-card-lang" hidden><span class="repo-card-dot"></span><span class="repo-card-lang-name"></span></span>
+    <span class="repo-card-stars" hidden><i class="far fa-star"></i> <span></span></span>
+    <span class="repo-card-forks" hidden><i class="fas fa-code-branch"></i> <span></span></span>
+  </div>
+</a>

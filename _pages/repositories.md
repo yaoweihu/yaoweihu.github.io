@@ -36,45 +36,34 @@ nav_order: 3
 ## GitHub Repositories
 
 {% if site.data.repositories.github_repos %}
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
+<div class="repo-grid">
   {% for repo in site.data.repositories.github_repos %}
     {% include repository/repo.html repository=repo %}
   {% endfor %}
 </div>
 {% endif %}
 
----
-
-## Global Visitor Map
-
-<div class="text-center my-4">
-
-<p style="font-size: 1.05em; margin-bottom: 1.2rem;">
-  <i class="fas fa-eye mr-1"></i> Total Visits:&nbsp;<span id="busuanzi_value_site_pv">...</span>
-  &emsp;|&emsp;
-  <i class="fas fa-user mr-1"></i> Unique Visitors:&nbsp;<span id="busuanzi_value_site_uv">...</span>
-</p>
-
-<p class="text-muted" style="margin-bottom: 1rem;">
-  Visitor locations are aggregated from IP geolocation and shown at city level.
-</p>
-
-<div style="max-width: 600px; margin: 0 auto; min-height: 260px;" id="clustrmaps-container">
-</div>
-
-</div>
-
 <script>
 (function () {
-  if (localStorage.getItem('site_owner') === '1') return;
-  var bsz = document.createElement('script');
-  bsz.async = true;
-  bsz.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-  document.head.appendChild(bsz);
-  var cm = document.createElement('script');
-  cm.type = 'text/javascript';
-  cm.id = 'clustrmaps';
-  cm.src = '//cdn.clustrmaps.com/map_v2.js?d=kCyV_lwXF6uxEPCyHMK5e43qpF_MxPS5Dd03ky1jE74&cl=ffffff&w=a&t=tt';
-  document.getElementById('clustrmaps-container').appendChild(cm);
+  var colors = {Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#3178c6', Jupyter: '#DA5B0B', 'Jupyter Notebook': '#DA5B0B', HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051', 'C++': '#f34b7d', C: '#555555', Java: '#b07219', R: '#198CE7', MATLAB: '#e16737'};
+  document.querySelectorAll('.repo-card[data-repo]').forEach(function (card) {
+    fetch('https://api.github.com/repos/' + card.dataset.repo)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (d) {
+        card.querySelector('.repo-card-desc').textContent = d.description || 'No description provided.';
+        var show = function (sel, text) {
+          var el = card.querySelector(sel);
+          el.querySelector(sel === '.repo-card-lang' ? '.repo-card-lang-name' : 'span').textContent = text;
+          el.hidden = false;
+        };
+        if (d.language) {
+          show('.repo-card-lang', d.language);
+          card.querySelector('.repo-card-dot').style.background = colors[d.language] || '#8b949e';
+        }
+        show('.repo-card-stars', d.stargazers_count);
+        show('.repo-card-forks', d.forks_count);
+      })
+      .catch(function () {});
+  });
 })();
 </script>
