@@ -397,63 +397,10 @@ footer.sticky-bottom {
     max-width: 50%;
   }
 }
-.repo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.repo-card {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1.2rem;
-  border: 1px solid var(--global-divider-color);
-  border-radius: 0.75rem;
-  background-color: var(--global-card-bg-color);
-  color: var(--global-text-color) !important;
-  text-decoration: none !important;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-}
-.repo-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--global-theme-color);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-.repo-card .repo-card-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-.repo-card .repo-card-icon {
-  color: var(--global-text-color-light);
-}
-.repo-card .repo-card-name {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--global-theme-color);
-  word-break: break-word;
-}
-.repo-card .repo-card-desc {
-  flex: 1;
-  margin: 0 0 0.8rem;
-  font-size: 0.9rem;
-  color: var(--global-text-color-light);
-  word-break: break-word;
-}
-.repo-card .repo-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.85rem;
-  color: var(--global-text-color-light);
-}
-.repo-card .repo-card-dot {
-  display: inline-block;
-  width: 0.7rem;
-  height: 0.7rem;
-  margin-right: 0.35rem;
+.repo-img-light.repo-avatar,
+.repo-img-dark.repo-avatar {
+  width: 180px !important;
+  max-width: 100%;
   border-radius: 50%;
 }
 
