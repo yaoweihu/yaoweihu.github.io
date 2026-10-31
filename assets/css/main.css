@@ -392,13 +392,6 @@ footer.sticky-bottom {
   background-color: var(--global-theme-color) !important;
 }
 
-.repo .repo-img-light,
-.repo .repo-img-dark {
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 @media (min-width: 768px) {
   .repo {
     max-width: 50%;
